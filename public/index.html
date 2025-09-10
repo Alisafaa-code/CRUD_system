@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <title>CRUD App</title>
+          <link rel="stylesheet" href="style.css" />
+     </head>
+     <body>
+          <div class="container">
+               <h1>CRUD Users</h1>
+
+               <h3>Add / Update User</h3>
+               <form>
+                    <input type="hidden" id="userId" name="userId" />
+                    <input
+                         type="text"
+                         id="username"
+                         name="username"
+                         placeholder="username"
+                    />
+                    <input
+                         type="email"
+                         id="email"
+                         name="email"
+                         placeholder="email"
+                    />
+                    <button type="submit" onclick="saveUser()">Save</button>
+               </form>
+
+               <h3>Users List</h3>
+               <table id="usersTable">
+                    <thead>
+                         <tr>
+                              <th>ID</th>
+                              <th>User Name</th>
+                              <th>Email</th>
+                              <th>Actions</th>
+                         </tr>
+                    </thead>
+                    <tbody></tbody>
+               </table>
+          </div>
+
+          <script src="script.js"></script>
+     </body>
+</html>
