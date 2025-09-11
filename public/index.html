@@ -2,44 +2,73 @@
 <html lang="en">
      <head>
           <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>CRUD App</title>
+          <link
+               href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+               rel="stylesheet"
+          />
           <link rel="stylesheet" href="style.css" />
      </head>
      <body>
-          <div class="container">
-               <h1>CRUD Users</h1>
+          <main class="container">
+               <header class="app-header">
+                    <h1>CRUD Users</h1>
+                    <p class="subtitle">
+                         Create, update and remove users — responsive & simple
+                         UI
+                    </p>
+               </header>
 
-               <h3>Add / Update User</h3>
-               <form>
-                    <input type="hidden" id="userId" name="userId" />
-                    <input
-                         type="text"
-                         id="username"
-                         name="username"
-                         placeholder="username"
-                    />
-                    <input
-                         type="email"
-                         id="email"
-                         name="email"
-                         placeholder="email"
-                    />
-                    <button type="submit" onclick="saveUser()">Save</button>
-               </form>
+               <section class="card form-card">
+                    <h3>Add / Update User</h3>
+                    <form id="userForm" novalidate>
+                         <input type="hidden" id="userId" name="userId" />
+                         <input
+                              type="text"
+                              id="username"
+                              name="username"
+                              placeholder="username"
+                         />
+                         <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              placeholder="email"
+                         />
+                         <div class="form-actions">
+                              <button type="submit" id="saveBtn">Save</button>
+                              <button type="button" id="clearBtn">Clear</button>
+                         </div>
+                    </form>
+               </section>
 
-               <h3>Users List</h3>
-               <table id="usersTable">
-                    <thead>
-                         <tr>
-                              <th>ID</th>
-                              <th>User Name</th>
-                              <th>Email</th>
-                              <th>Actions</th>
-                         </tr>
-                    </thead>
-                    <tbody></tbody>
-               </table>
-          </div>
+               <section class="card list-card">
+                    <h3>Users List</h3>
+                    <div class="table-wrap">
+                         <table id="usersTable" aria-describedby="users-list">
+                              <thead>
+                                   <tr>
+                                        <th>ID</th>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Actions</th>
+                                   </tr>
+                              </thead>
+                              <tbody></tbody>
+                         </table>
+                    </div>
+               </section>
+
+               <footer class="app-footer">
+                    <small
+                         >Server:
+                         <a href="http://localhost:3000" target="_blank"
+                              >http://localhost:3000</a
+                         ></small
+                    >
+               </footer>
+          </main>
 
           <script src="script.js"></script>
      </body>
