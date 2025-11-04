@@ -23,7 +23,12 @@
         <h3>Add / Update User</h3>
         <form id="userForm" novalidate>
           <input type="hidden" id="userId" name="userId" />
-          <input type="text" id="name" name="name" placeholder="name" />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="username"
+          />
           <input type="email" id="email" name="email" placeholder="email" />
           <div class="form-actions">
             <button type="submit" id="saveBtn">Save</button>
@@ -51,8 +56,6 @@
 
       <!-- Footer removed as we no longer use a local server -->
     </main>
-
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

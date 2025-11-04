@@ -1,8 +1,10 @@
-// Initialize Supabase client
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
 const supabaseUrl = "https://pfnratzuuxzjzzaccspn.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmbnJhdHp1dXh6anp6YWNjc3BuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIwMDgxNDAsImV4cCI6MjA3NzU4NDE0MH0.IiyfapMKuO8R_N6CYsr5c8MiKX0aJvKn3awj19-EW0w";
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+// Initialize Supabase client
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("userForm");
@@ -13,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("clearBtn").addEventListener("click", () => {
     document.getElementById("userId").value = "";
-    document.getElementById("name").value = "";
+    document.getElementById("username").value = "";
     document.getElementById("email").value = "";
   });
 
@@ -24,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function fetchUsers() {
   try {
     const { data: users, error } = await supabase
-      .from("users")
+      .from("orders")
       .select("*")
       .order("id", { ascending: true });
 
@@ -39,7 +41,7 @@ async function fetchUsers() {
       idTd.textContent = user.id;
 
       const nameTd = document.createElement("td");
-      nameTd.setAttribute("data-label", "Name");
+      nameTd.setAttribute("data-label", "User Name");
       nameTd.textContent = user.name;
 
       const emailTd = document.createElement("td");
@@ -86,7 +88,7 @@ async function fetchUsers() {
 // Save (Create or Update)
 async function saveUser() {
   const id = document.getElementById("userId").value;
-  const name = document.getElementById("name").value.trim();
+  const name = document.getElementById("username").value.trim();
   const email = document.getElementById("email").value.trim();
 
   if (!name || !email) return alert("Enter name and email");
@@ -96,21 +98,21 @@ async function saveUser() {
     if (id) {
       // Update
       const { error: updateError } = await supabase
-        .from("users")
+        .from("orders")
         .update({ name, email })
         .eq("id", id);
       error = updateError;
     } else {
       // Create
       const { error: insertError } = await supabase
-        .from("users")
+        .from("orders")
         .insert([{ name, email }]);
       error = insertError;
     }
 
     if (error) throw error;
     document.getElementById("userId").value = "";
-    document.getElementById("name").value = "";
+    document.getElementById("username").value = "";
     document.getElementById("email").value = "";
     fetchUsers();
   } catch (err) {
@@ -122,7 +124,7 @@ async function saveUser() {
 // Edit user
 function editUser(id, name, email) {
   document.getElementById("userId").value = id;
-  document.getElementById("name").value = name;
+  document.getElementById("username").value = name;
   document.getElementById("email").value = email;
 }
 
@@ -130,7 +132,7 @@ function editUser(id, name, email) {
 async function deleteUser(id) {
   if (confirm("Are you sure?")) {
     try {
-      const { error } = await supabase.from("users").delete().eq("id", id);
+      const { error } = await supabase.from("orders").delete().eq("id", id);
 
       if (error) throw error;
       fetchUsers();
